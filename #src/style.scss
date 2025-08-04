@@ -1,0 +1,120 @@
+@import "./reset.scss";
+$color-white: #ffffff;
+$color-blue: #6b59d0;
+$color-gray: #374151;
+$color-light-gray: #6b7280;
+$dash-color: #deddeb;
+$text-styles: (
+  heading: (
+    font-size: 3rem,
+    font-weight: 800,
+    color: $color-gray,
+  ),
+  small-heading: (
+    font-size: 1.5rem,
+    font-weight: 700,
+    color: $color-blue,
+  ),
+  card-heading: (
+    font-size: 1.125rem,
+    font-weight: 700,
+    color: $color-gray,
+  ),
+  body: (
+    font-size: 1.125rem,
+    font-weight: 400,
+    color: $color-light-gray,
+  ),
+  body-active: (
+    font-size: 1.125rem,
+    font-weight: 400,
+    color: $color-blue,
+  ),
+);
+@mixin text-format($type) {
+  font-size: map-get(map-get($text-styles, $type), font-size);
+  font-weight: map-get(map-get($text-styles, $type), font-weight);
+  color: map-get(map-get($text-styles, $type), color);
+}
+.wrapper {
+  min-height: 100vh;
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-white;
+  font-family: "Red Hat Display", sans-serif;
+  position: relative;
+}
+.background-img {
+  background-image: url(../img/background.png);
+  background-repeat: no-repeat;
+  min-height: 20%;
+  min-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+.container {
+  max-width: 70.625rem;
+  padding-top: 0.75rem;
+}
+.title-box {
+  margin-bottom: 5rem;
+  max-width: 65%;
+  padding: 0 1.25rem;
+}
+.subtitle {
+  @include text-format(small-heading);
+  display: block;
+  margin-bottom: 1.25rem;
+}
+.title {
+  @include text-format(heading);
+}
+.solution-list {
+  display: flex;
+}
+.solution-card {
+  &::before {
+    content: "";
+    position: absolute;
+    min-height: 100%;
+    top: 0;
+    width: 20px;
+    z-index: 1;
+    border-left: 2px dashed $dash-color;
+  }
+  &__img-box {
+    padding-left: 20px;
+  }
+  &__img {
+    max-width: 3.125rem;
+    max-height: 3.125rem;
+  }
+  &__description {
+    margin-top: 2rem;
+    padding-left: 1.25rem;
+  }
+  &__title {
+    @include text-format(card-heading);
+    margin-bottom: 1.25rem;
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      left: -20px;
+      z-index: 2;
+      min-height: 100%;
+      border: 0.0625rem solid $color-blue;
+      margin-right: 1.25rem;
+    }
+  }
+  &__text {
+    @include text-format(body);
+  }
+  &__text--active {
+    @include text-format(body-active);
+  }
+}
